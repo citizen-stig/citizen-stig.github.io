@@ -262,6 +262,7 @@ As a result we have:
 Most of the ideas have been taken from a great book ["Two scoops of django" ](http://twoscoopspress.org/collections/everything/products/two-scoops-of-django-1-8)
 [Docker ](https://www.docker.com/) inspires me to maintain project simple.
 Other:
+
 * [Flask bone](https://github.com/imwilsonxu/fbone)
 * [Official documentation](http://flask.pocoo.org/docs/0.10/patterns/packages/)
 * [https://etscrivner.github.io/posts/2014/10/building-large-flask-apps-in-the-real-world/](https://etscrivner.github.io/posts/2014/10/building-large-flask-apps-in-the-real-world/)

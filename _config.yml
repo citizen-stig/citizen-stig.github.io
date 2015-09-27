@@ -10,3 +10,6 @@ github_username:  citizen-stig
 
 # Build settings
 markdown: kramdown
+
+gems:
+    - jekyll-sitemap
