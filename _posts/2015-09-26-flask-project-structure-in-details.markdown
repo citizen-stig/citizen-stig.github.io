@@ -34,12 +34,14 @@ Full solution is provided at [the end of this post ]({% post_url 2015-09-26-flas
 
 ## Generic ##
 
-    ├── .gitignore
-    ├── Vagrantfile
-    ├── README.md
-    ├── requirements.txt
-    ├── docs
-    ├── bin/
+{% highlight bash %}
+├── .gitignore
+├── Vagrantfile
+├── README.md
+├── requirements.txt
+├── docs
+├── bin/
+{% endhighlight %}
 
 **.gitignore** is necessary for preventing commits with some junk files, such as *.pyc.
 
@@ -76,10 +78,12 @@ Cons:
 
 ## Configuration is a part of the code ##
 
-    ├── deploy/
-    │   ├── nginx/
-    │   ├── gunicorn/
-    │   └── supervisor/
+{% highlight bash %}
+├── deploy/
+│   ├── nginx/
+│   ├── gunicorn/
+│   └── supervisor/
+{% endhighlight %}
 
 Tracking configuration changes with code is a good idea, because it forces developers update the configuration accordingly with the code. 
 
@@ -88,49 +92,51 @@ Tracking configuration changes with code is a good idea, because it forces devel
 
 ## Flask application ##
 
-    ├── yourapp/
-    │   ├── Dockerfile
-    │   ├── requirements/
-    │   │   ├── production.txt         - base requirements file
-    │   │   ├── develop.txt            - for developer tools, depends on production.txt [ and on ci.txt]
-    │   │   └── ci.txt                 - used in CI, depends only on production.txt
-    │   ├── templates/
-    │   │   ├── layouts/               - base templates used for extending
-    │   │   ├── macros/                - jinja macroses 
-    │   │   ├── errors/                - 404.html, 500.html and so on
-    │   │   ├── app1/                  - templates for app1
-    │   │   └── app2/
-    │   ├── static/                    - served by nginx
-    │   │   ├── css/                   - style sheets
-    │   │   ├── fonts/
-    │   │   ├── js/                    - javascript
-    │   │   ├── img/
-    │   │   ├── robots.txt
-    │   │   └── sitemap.xml
-    │   ├── migrations/                - database migrations
-    │   ├── config/
-    │   │   ├── __init__.py
-    │   │   ├── base.py
-    │   │   ├── production.py
-    │   │   ├── develop.py
-    │   │   └── ci.py
-    │   ├── app1/
-    │   │   ├── __init__.py
-    │   │   ├── controllers.py         - blueprint with app1 specific controllers
-    │   │   ├── forms.py                
-    │   │   └── models.py               
-    │   ├── app2/
-    │   │   └── ...
-    │   └── app.py                     - flask application object and manage commands interface
-
+{% highlight bash %}
+├── yourapp/
+│   ├── Dockerfile
+│   ├── requirements/
+│   │   ├── production.txt         - base requirements file
+│   │   ├── develop.txt            - for developer tools, depends on production.txt [ and on ci.txt]
+│   │   └── ci.txt                 - used in CI, depends only on production.txt
+│   ├── templates/
+│   │   ├── layouts/               - base templates used for extending
+│   │   ├── macros/                - jinja macroses 
+│   │   ├── errors/                - 404.html, 500.html and so on
+│   │   ├── app1/                  - templates for app1
+│   │   └── app2/
+│   ├── static/                    - served by nginx
+│   │   ├── css/                   - style sheets
+│   │   ├── fonts/
+│   │   ├── js/                    - javascript
+│   │   ├── img/
+│   │   ├── robots.txt
+│   │   └── sitemap.xml
+│   ├── migrations/                - database migrations
+│   ├── config/
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── production.py
+│   │   ├── develop.py
+│   │   └── ci.py
+│   ├── app1/
+│   │   ├── __init__.py
+│   │   ├── controllers.py         - blueprint with app1 specific controllers
+│   │   ├── forms.py                
+│   │   └── models.py               
+│   ├── app2/
+│   │   └── ...
+│   └── app.py                     - flask application object and manage commands interface
+{% endhighlight %}
 
 ### Python requirements management ##
 
-    │   ├── requirements/
-    │   │   ├── production.txt
-    │   │   ├── develop.txt
-    │   │   └── ci.txt
-
+{% highlight bash %}
+│   ├── requirements/
+│   │   ├── production.txt
+│   │   ├── develop.txt
+│   │   └── ci.txt
+{% endhighlight %}
 Any python based web project uses a lot of 3rd party packages, and pip's requirements files are a good way of keep track of project dependencies. But the most progressive way, described in the "2 scoops of django" is maintain requirements not in a single file but in several with their own hierarchy. Obviously, that production.txt is the base and should contains as few dependencies as possible. develop.txt depends on production.txt and adds some useful packages for developers, such as flask-debug-toolbar, freezegun, pylint and pep8.
 
 
@@ -145,12 +151,14 @@ If your project has any web pages rendered on the server side it obviously has a
 
 ## Flaks configurations ##
 
-    │   ├── config/
-    │   │   ├── __init__.py
-    │   │   ├── base.py
-    │   │   ├── production.py
-    │   │   ├── develop.py
-    │   │   └── ci.py
+{% highlight bash %}
+│   ├── settings/
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── production.py
+│   │   ├── develop.py
+│   │   └── ci.py
+{% endhighlight %}
 
 Official documentation [recommends](http://flask.pocoo.org/docs/0.10/config/#configuring-from-files) to separate Flask configuration from application code, but I think it's not convenient when your application becomes large and you won't distribute it in public. 
 
@@ -161,20 +169,22 @@ So in this case you probably would like to have configuration under control. The
 
 # Testing #
 
-    └── tests
-        ├── __init__.py
-        ├── base.py                    - base test case and utility functions
-        ├── constants.py               - testing constants
-        ├── conf
-        │   ├── pep8.rc
-        │   └── pylint.rc
-        ├── test_app1/
-        │   ├── __init__.py
-        │   ├── test_models.py
-        │   └── test_controllers.py
-        ├── test_app2/
-        │   └── ... 
-        └── test_integration/
+{% highlight bash %}
+└── tests
+    ├── __init__.py
+    ├── base.py                    - base test case and utility functions
+    ├── constants.py               - testing constants
+    ├── conf
+    │   ├── pep8.rc
+    │   └── pylint.rc
+    ├── test_app1/
+    │   ├── __init__.py
+    │   ├── test_models.py
+    │   └── test_controllers.py
+    ├── test_app2/
+    │   └── ... 
+    └── test_integration/
+{% endhighlight %}
 
 There's several reasons to separate code of the tests and code of the application:
 
@@ -187,66 +197,67 @@ There's several reasons to separate code of the tests and code of the applicatio
 
 
 # Final Solution #
-
-    ├ project_root/
-    ├── .gitignore                    
-    ├── Vagrantfile
-    ├── README.md
-    ├── requirements.txt               - reference to the yourapp/requirement/production.txt
-    ├── docs
-    ├── bin/
-    ├── deploy/
-    │   ├── nginx/
-    │   ├── gunicorn/
-    │   └── supervisor/
-    ├── yourapp/
-    │   ├── Dockerfile
-    │   ├── requirements/
-    │   │   ├── production.txt         - base requirements file
-    │   │   ├── develop.txt            - for developer tools, depends on production.txt [and on ci.txt]
-    │   │   └── ci.txt                 - used in CI, depends only on production.txt
-    │   ├── templates/
-    │   │   ├── layouts/               - base templates used for extending
-    │   │   ├── macros/                - jinja macroses 
-    │   │   ├── errors/                - 404.html, 500.html and so on
-    │   │   ├── app1/                  - templates for app1
-    │   │   └── app2/
-    │   ├── static/                    - served by nginx
-    │   │   ├── css/                   - style sheets
-    │   │   ├── fonts/
-    │   │   ├── js/                    - javascript
-    │   │   ├── img/
-    │   │   ├── robots.txt
-    │   │   └── sitemap.xml
-    │   ├── migrations/                - database migrations
-    │   ├── config/
-    │   │   ├── __init__.py
-    │   │   ├── base.py
-    │   │   ├── production.py
-    │   │   ├── develop.py
-    │   │   └── ci.py
-    │   ├── app1/
-    │   │   ├── __init__.py
-    │   │   ├── controllers.py         - blueprint with app1 specific controllers
-    │   │   ├── forms.py
-    │   │   └── models.py
-    │   ├── app2/
-    │   │   └── ...
-    │   └── app.py                     - flask application object and manage commands interface
-    └── tests
-        ├── __init__.py
-        ├── base.py                    - base test case and utility functions
-        ├── constants.py               - testing constants
-        ├── conf
-        │   ├── pep8.rc
-        │   └── pylint.rc
-        ├── test_app1/
-        │   ├── __init__.py
-        │   ├── test_models.py
-        │   └── test_controllers.py
-        ├── test_app2/
-        │   └── ... 
-        └── test_integration/
+{% highlight bash %}
+├ project_root/
+├── .gitignore                    
+├── Vagrantfile
+├── README.md
+├── requirements.txt               - reference to the yourapp/requirement/production.txt
+├── docs
+├── bin/
+├── deploy/
+│   ├── nginx/
+│   ├── gunicorn/
+│   └── supervisor/
+├── yourapp/
+│   ├── Dockerfile
+│   ├── requirements/
+│   │   ├── production.txt         - base requirements file
+│   │   ├── develop.txt            - for developer tools, depends on production.txt [and on ci.txt]
+│   │   └── ci.txt                 - used in CI, depends only on production.txt
+│   ├── templates/
+│   │   ├── layouts/               - base templates used for extending
+│   │   ├── macros/                - jinja macroses 
+│   │   ├── errors/                - 404.html, 500.html and so on
+│   │   ├── app1/                  - templates for app1
+│   │   └── app2/
+│   ├── static/                    - served by nginx
+│   │   ├── css/                   - style sheets
+│   │   ├── fonts/
+│   │   ├── js/                    - javascript
+│   │   ├── img/
+│   │   ├── robots.txt
+│   │   └── sitemap.xml
+│   ├── migrations/                - database migrations
+│   ├── config/
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── production.py
+│   │   ├── develop.py
+│   │   └── ci.py
+│   ├── app1/
+│   │   ├── __init__.py
+│   │   ├── controllers.py         - blueprint with app1 specific controllers
+│   │   ├── forms.py
+│   │   └── models.py
+│   ├── app2/
+│   │   └── ...
+│   └── app.py                     - flask application object and manage commands interface
+└── tests
+    ├── __init__.py
+    ├── base.py                    - base test case and utility functions
+    ├── constants.py               - testing constants
+    ├── conf
+    │   ├── pep8.rc
+    │   └── pylint.rc
+    ├── test_app1/
+    │   ├── __init__.py
+    │   ├── test_models.py
+    │   └── test_controllers.py
+    ├── test_app2/
+    │   └── ... 
+    └── test_integration/
+{% endhighlight %}
 
 # Conclusion #
 
