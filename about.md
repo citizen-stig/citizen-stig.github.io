@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-My name is Nikolay Golub, I'm python developer at Toptal
+My name is Nikolay Golub, I'm software engineer at Toptal
