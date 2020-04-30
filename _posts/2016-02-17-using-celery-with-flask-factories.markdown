@@ -25,7 +25,7 @@ factories/
 worker.py            # Module for worker process
 {% endhighlight %}
 
-`factories.application`:
+Simple flask app is configured in `factories.application`:
 
 {% highlight python %}
 from flask import Flask
@@ -41,7 +41,7 @@ def create_application():
     return app 
 {% endhighlight %}
 
-`factories.celery`:
+In  `factories.celery` Please note, that we need to override `TaskBase`, co celery can access flask app contenxt, such as `current_app`. :
 
 {% highlight python %}
 from celery import Celery
@@ -59,6 +59,7 @@ def configure_celery(app: Flask) -> Celery:
         abstract = True
 
         def __call__(self, *args, **kwargs):
+            # Celery task will run inside app context
             with app.app_context():
                 return TaskBase.__call__(self, *args, **kwargs)
 
@@ -66,7 +67,7 @@ def configure_celery(app: Flask) -> Celery:
     return celery
 {% endhighlight %}
 
-`tasks.py`:
+`tasks.py` just contains basic task. Please note, that task binded to celery instance. `@shared_task` could've been used, but this approach is less magical:
 
 {% highlight python %}
 from factories.celery import create_celery
