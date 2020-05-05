@@ -16,6 +16,7 @@ comments: true
 
 
   <div class="share-buttons">
+    <h2>Share</h2>
     <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" class="twitter-share-button" data-show-count="false">Twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
     <script async src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script><script async type="IN/Share" data-url="{{ site.url }}{{ page.url }}"></script>
@@ -24,6 +25,7 @@ comments: true
   </div>
 
   {% if page.comments %}
+    <h2>Comments</h2>
     <div id="disqus_thread"></div>
     <script>
 
