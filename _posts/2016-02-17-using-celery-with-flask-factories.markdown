@@ -2,7 +2,8 @@
 layout: post
 title:  "Using Celery with Flask Factories"
 date:   2016-02-17 22:30:00 +0300
-tags: [flask, celery, factory pattern]
+tags: [python, flask, celery, factory pattern]
+comments: true
 ---
 
 # Introduction #

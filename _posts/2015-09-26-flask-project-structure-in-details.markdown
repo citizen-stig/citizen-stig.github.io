@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "Flask Project Structure in Details"
-date:   2015-09-26 22:18:00 +0300
-tags: [flask]
+title: "Flask Project Structure in Details"
+date: 2015-09-26 22:18:00 +0300
+tags: [python, flask]
+comments: true
 ---
 
 

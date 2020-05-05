@@ -1,8 +1,9 @@
 ---
 title: Converting bits to integers in Rust using generics
 layout: post
-date:   2020-04-04 22:26:00 +0300
+date: 2020-04-04 22:26:00 +0300
 tags: [rust, generics]
+comments: true
 ---
 
 Let's imagine there's input from some device, that produces only zeros and ones and it needed to be converted into actual integers, something like
@@ -122,3 +123,5 @@ if bits.iter()
 
 The final solution with all latest changes:
 <script src="https://gist.github.com/citizen-stig/6e8efd2ba3b2cca3681098d35e5f91b6.js"></script>
+
+

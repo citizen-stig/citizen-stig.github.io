@@ -9,6 +9,7 @@
       </div>
     </div>
     {% include footer.html %}
+    {% if jekyll.environment == 'production' %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-62086563-2"></script>
     <script>
@@ -18,7 +19,6 @@
 
       gtag('config', 'UA-62086563-2');
     </script>
-
-
+    {% endif %}
   </body>
 </html>
