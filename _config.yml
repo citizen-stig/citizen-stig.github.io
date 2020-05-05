@@ -1,8 +1,8 @@
 # Site settings
-title: Programming and other geek stuff 
+title: Software, technology and experementation
 email: nikolay.v.golub@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  This blog is about python progamming, linux and some other IT stuff.
+  Software development, languages, tools and everything else
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://citizen-stig.github.io" # the base hostname & protocol for your site
 twitter_username: citizen_stig

@@ -24,7 +24,7 @@ comments: true
     <script async src="https://telegram.org/js/telegram-widget.js?8" data-telegram-share-url="{{ site.url }}{{ page.url }}" data-comment="{{ page.title }}"></script>
   </div>
 
-  {% if page.comments %}
+  {% if jekyll.environment == "production" and page.comments %}
     <h2>Comments</h2>
     <div id="disqus_thread"></div>
     <script>
