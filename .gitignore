@@ -5,3 +5,5 @@ _site
 drafts
 .jekyll-cache/
 _drafts/
+
+.DS_Store

@@ -1,7 +1,7 @@
 ---
 title: Converting bits to integers in Rust using generics
 layout: post
-date: 2020-04-04 22:26:00 +0300
+date: 2020-04-04 22:26:00 +0200
 tags: [rust, generics]
 comments: true
 ---
@@ -21,7 +21,7 @@ In this article, I will show how Rust functions can be generalized using generic
 
 Here's my first and naive implementation:
 
-<script src="https://gist.github.com/citizen-stig/e959810d86dd4019ae03e58f89237937.js"></script>
+{% gist e959810d86dd4019ae03e58f89237937 %}
 
 No magic, doing bit shift, and then XORing result with each bit. If it is 1 it will be added to result, if it is zero, zero remains in the rightmost position.
 
