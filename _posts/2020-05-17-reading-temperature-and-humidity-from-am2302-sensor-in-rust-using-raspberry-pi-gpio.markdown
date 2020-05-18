@@ -1,20 +1,31 @@
 ---
-title: Reading temperature and humidity from AM2302 sensor in Rust using Raspberry Pi GPIO
+title: Reading temperature sensor in Rust using Raspberry Pi GPIO
+description: Implementing Rust program for reading temperature and humidity from AM2302 sensor.
 layout: post
 date: 2020-05-17 21:20:00 +0200
-tags: [rust, generics]
+tags: [rust, gpio, iot]
 comments: true
+image: /assets/img/rpi_am2302.jpeg
 ---
 
-# Devices
 
-I use [AM2302](https://www.adafruit.com/product/393) sensor, which is wired version of DHT22 sensor and Raspberry Pi 3
+## Intro
+
+While learning Rust one of the exercises I always wanted to try is GPIO and low-level device communication.
+Simple examples like configuring button handler or led blinking are not that exciting because they are not practical.
+Reading temperature and humidity, on the contrary, allows building something like a weather station or just simple graphs.
+While it will be much easier to use python with existing libraries. In my opinion, writing it in Rust assembles efficiency of C and readability and safety of Python.
+
+
+## Devices
+
+I use the [AM2302](https://www.adafruit.com/product/393) sensor, which is a wired version of DHT22 sensor and Raspberry Pi 3 Model B+, which is on the picture above.
 
 
 # Connection
 
-Utility [`pinout`](https://pinout.xyz) allows to get actual pin number for particular Raspberry pi model,
-here is part of the output for Raspberry Pi 3 model:
+Utility [`pinout`](https://pinout.xyz) which is part of [python-gpiozero](https://gpiozero.readthedocs.io/en/stable/installing.html) package, allows to get an actual number of the pin for a particular Raspberry Pi model,
+here is part of the output for the Raspberry Pi 3 model:
 
 {% highlight bash %}
    3V3  (1) (2)  5V
@@ -25,35 +36,35 @@ here is part of the output for Raspberry Pi 3 model:
 {% endhighlight %}
 
 
-* Red wire goes to `pin 2` 5V. Most other examples use 3.3V pin, but I decided to use 5 to avoid low voltage issues.
-* Black wire goest to `pin 9`, ground. Any other ground can be used.
-* Yellow wire goest to `pin 7`, which reffered as GPIO4, so `4` will be used in the code
+* The red wire goes to `pin 2` 5V. Most other examples use 3.3V pin, but I decided to use 5 to avoid low voltage issues.
+* Black wire goes to `pin 9`, ground. Any other ground can be used.
+* Yellow wire goest to `pin 7`, which refered as GPIO4, so `4` will be used in the code
 
 
 ![AM2302 wiring](/assets/img/AM2302_RPI3_bb.png)
 
 
-# Code
+## Code
 
 There are several options for working with GPIO interface in Rust:
 
 * [gpio-cdev](https://github.com/rust-embedded/gpio-cdev)
 * [rust-sysfs-gpio](https://github.com/rust-embedded/rust-sysfs-gpio)
 
-I decided to use gpio-cdev package, as sysfs interface is going [to be deprecated](https://www.kernel.org/doc/Documentation/ABI/obsolete/sysfs-gpio)
+I decided to use gpio-cdev package, as sysfs interface is going [to be deprecated](https://www.kernel.org/doc/Documentation/ABI/obsolete/sysfs-gpio).
 
 
-## Prepare
+# Prepare
 
-Adding dependecy to `Cargo.toml`:
-
+First, adding a dependency to `Cargo.toml`:
 
 {% highlight toml %}
 [dependencies]
 gpio-cdev = "0.2"
 {% endhighlight %}
 
-Gpio-cdev has pretty clear and simple documentation so we can have this function to get line.
+Gpio-cdev has pretty clear and simple documentation so we can have this function to get a line object.
+As documentation describes line: "Lines are offset within gpiochip0"
 
 {% highlight rust %}
 use gpio_cdev::{Chip, Line};
@@ -66,9 +77,9 @@ fn get_line(gpio_number: u32) -> Line {
 
 `gpio_number` in my case is 4.
 
-## Requesting data
+# Requesting data
 
-According to the [documentation](https://cdn-shop.adafruit.com/datasheets/Digital+humidity+and+temperature+sensor+AM2302.pdf) to initialize data transfer from device, it should be set status to zero for about at about 1 - 10 milliseonds.
+According to the [sensor documentation](https://cdn-shop.adafruit.com/datasheets/Digital+humidity+and+temperature+sensor+AM2302.pdf) to initialize data transfer from the device, it should be set the status to zero (pull down) for about 1 - 10 milliseconds.
 
 {% highlight rust %}
 use std::{thread, time};
@@ -84,12 +95,12 @@ fn do_init(line: &Line) {
 }
 {% endhighlight %}
 
-## Reading Data, Part 1
+# Reading Data, Part 1
 
 There are 2 options reading the data,
 
-1. Pulling data manually using  line request `get_value`
-2. Subscribing to events from the line, using `.events` method of the line
+1. Pulling data manually using  line request and `.get_value()` method
+2. Subscribing to events from the line, using `.events()` method of the line
 
 Let's try first approach as it is straight forward.
 
@@ -117,10 +128,10 @@ while start.elapsed() < contact_time {
 
 But how to check if all these changes are valid data, or if initiliazing works properly?
 
-I prefer to stop here, and start from other end of this: decoding data, and then get back to reading and check if data is correct. 
+I prefer to stop here, and start from other end: write decoding data part, and then get back to reading and check if data is correct. 
 
 
-## Decoding data
+# Decoding data
 
 Here is example from documentation on how data is repesented:
 
@@ -130,27 +141,27 @@ Example: MCU has received 40 bits data from AM2302 as
          0000 0010 1000 1100 0000 0001 0101 1111   1110 1110
              16 bits RH data      16 bits T data   check sum
 
-         Here we convert 16 bits RH data from binary system to decimal system,
+         Here we convert 16 bits RH data from binary system to the decimal system,
          0000 0010 1000 1100  →             652
                Binary system     Decimal system
          
          RH=652/10=65.2%RH
 
-         Here we convert 16 bits T data from binary system to decimal system,
+         Here we convert 16 bits T data from binary system to the decimal system,
          0000 0001 0101 1111   →            351
                Binary system     Decimal system
 
          T=351/10=35.1°C
 
-         When highest bit of temperature is 1, 
-         it means the temperature is below 0 degree Celsius.
+         When the highest bit of temperature is 1, 
+         it means the temperature is below 0 degrees Celsius.
          
          Example: 1000 0000 0110 0101, T= minus 10.1°C
                        16 bits T data
          
-         Sum       = 0000 0010+1000 1100+0000 0001+0101 1111 = 1110 1110 
+         Sum       = 0000 0010 + 1000 1100 + 0000 0001 + 0101 1111 = 1110 1110 
 
-         Check-sum = the last 8 bits of Sum                  = 11101110
+         Check-sum = the last 8 bits of Sum                        = 1110 1110
 {% endhighlight %}
 
 So let's express it in Rust!
@@ -173,13 +184,10 @@ Data we receive is not always correct, so errors will happen, this enum will rep
 pub enum CreationError {
     // Wrong number of input bites, should be 40
     WrongBitsCount,
-
     // Something wrong with conversion to bytes
     MalformedData,
-
     // Parity Bit Validation Failed
     ParityBitMismatch,
-
     // Value is outside of specification
     OutOfSpecValue,
 }
@@ -189,12 +197,12 @@ And to build reading we will need to define a constructor, that will take vector
 
 It checks:
 
-* That there's only 40 bits
+* That there are only 40 bits
 * That vector contains only 1s and 0s
 * That checksum is correct
 * That actual values are valid by specification
 
-It also does all necessary conversion.
+It also does all the necessary conversions.
 
 Note, that `convert` function that converts vector of 1s and 0s to integer is described in [my another article](https://citizen-stig.github.io/2020/04/04/converting-bits-to-integers-in-rust-using-generics.html)
 
@@ -292,12 +300,12 @@ Having all this allows to get back to reading actual data and check if it is cor
 
 # Reading Data, Part 2
 
-How do I convert all these state changes to vector of bits?
+How do I convert all these state changes to a vector of bits?
 
-According to documentation, actual values are represented by amount of time signal was in `1` state, where
+According to documentation, actual values are represented by the amount of time signal was in `1` state, where
 
-* `0` means 26-28 milliseconds
-* `1` means 70 milliseconds
+* `0` for 26-28 milliseconds
+* `1` for 70 milliseconds
 
 
 But another [document by aosong.com](http://akizukidenshi.com/download/ds/aosong/AM2302.pdf) I've found shows this table:
@@ -307,10 +315,10 @@ But another [document by aosong.com](http://akizukidenshi.com/download/ds/aosong
 | Signal "0" high time     |  22 |      26 |  30 |   μS |
 | Signal "1" high time     |  68 |      70 |  75 |   μS |
 
-So considering error in measurements, I will take `35ms` as cutoff between 1 and zero.
-Also, I want to separate reading data and parsing it, so no cpu cycles will be spent during receiving.
+So considering error in measurements, I will take `35 milliseconds` as the cutoff between 1 and 0.
+Also, I want to separate reading data and parsing it, so no CPU cycles will be spent during receiving on other than reading data from device.
 
-raw data" will be represented with `Event` structure, which will have timestamp and type: 
+"Raw data" will be represented with `Event` structure, which will have timestamp and type: 
 
 {% highlight rust %}
 #[derive(Debug, PartialEq)]
@@ -452,22 +460,24 @@ Error: ParityBitMismatch
 
 As you might see, it is not always to possible to read the data, and often first attemp is ParityBitMisMatch
 
-# Note on different approach
+## Note on a different approach
 
-Pulling doesn't look like the most performant way of reading data, and subscribing to events `.events()` suppose to be more efficient, but with this approach I was unable to get enough data in callback. So this require further investigation.
+Pulling doesn't look like the most performant way of reading data, and subscribing to events using `.events()` method suppose to be more efficient, but I was unable to get enough transitions in the callback. I haven't investigated, why this is happening.
 
-# Conclusion
+## Conclusion
 
 Making binary data more readable simplifies experimentation a lot!
 
+Only tests can make "some rust code" to become "rust code you trust".
+
 Couple improvement can be done, such as:
 
-* Skipping 1st bit if there's 41 bits was received, as it is signal bit
-* Allocating space for vector of events upfront
-* Making pin number to be command line argument
+* Skipping 1st bit if there are 41 bits was received, as it is signal bit
+* Allocating space for a vector of events upfront
+* Making pin to be a command-line argument
 * More extensive testing
 
-The full example is aviailable in GitHub Repository [citizen-stig/gpio-am2302-rs](https://github.com/citizen-stig/gpio-am2302-rs)
+The full example is available in GitHub Repository [citizen-stig/gpio-am2302-rs](https://github.com/citizen-stig/gpio-am2302-rs)
 
 
 

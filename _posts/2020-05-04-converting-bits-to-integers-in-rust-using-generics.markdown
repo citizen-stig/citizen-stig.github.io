@@ -1,5 +1,6 @@
 ---
 title: Converting bits to integers in Rust using generics
+description: Real use case for Generics in Rust with some hidden tricks
 layout: post
 date: 2020-04-04 22:26:00 +0200
 tags: [rust, generics]

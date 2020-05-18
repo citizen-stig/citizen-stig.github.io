@@ -21,6 +21,9 @@
   {% else %}
   <meta property="og:description" content="{{ site.description }}" />
   {% endif %}
+  {% if page.image %}
+  <meta property="og:image" content="{{ site.url }}{{ page.image }}" />
+  {% endif %}
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@citizen_stig" />
@@ -37,5 +40,8 @@
   {% endif %}
   {% if page.url %}
   <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+  {% endif %}
+  {% if page.image %}
+  <meta name=”twitter:image” content="{{ site.url }}{{ page.image }}" />
   {% endif %}
 </head>
