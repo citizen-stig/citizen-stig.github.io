@@ -304,8 +304,8 @@ How do I convert all these state changes to a vector of bits?
 
 According to documentation, actual values are represented by the amount of time signal was in `1` state, where
 
-* `0` for 26-28 milliseconds
-* `1` for 70 milliseconds
+* `0` for 26-28 microseconds
+* `1` for 70 microseconds
 
 
 But another [document by aosong.com](http://akizukidenshi.com/download/ds/aosong/AM2302.pdf) I've found shows this table:
