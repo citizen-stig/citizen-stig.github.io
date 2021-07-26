@@ -1,8 +1,8 @@
 # Site settings
-title: Software, technology and experementation
+title: Software, technology and experimentation
 email: nikolay.v.golub@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Software development, languages, tools and everything else
+  Software development, languages, tools, philosophy and everything else
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://citizen-stig.github.io" # the base hostname & protocol for your site
 twitter_username: citizen_stig
