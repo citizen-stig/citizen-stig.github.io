@@ -14,7 +14,7 @@ image: /assets/img/rpi_am2302.jpeg
 While learning Rust one of the exercises I always wanted to try is GPIO and low-level device communication.
 Simple examples like configuring button handler or led blinking are not that exciting because they are not practical.
 Reading temperature and humidity, on the contrary, allows building something like a weather station or just simple graphs.
-While it will be much easier to use python with existing libraries. In my opinion, writing it in Rust assembles efficiency of C and readability and safety of Python.
+While it will be much easier to use python with existing libraries. In my opinion, writing it in Rust resembles efficiency of C and readability and safety of Python.
 
 
 ## Devices
@@ -315,7 +315,7 @@ But another [document by aosong.com](http://akizukidenshi.com/download/ds/aosong
 | Signal "0" high time     |  22 |      26 |  30 |   μS |
 | Signal "1" high time     |  68 |      70 |  75 |   μS |
 
-So considering error in measurements, I will take `35 milliseconds` as the cutoff between 1 and 0.
+So considering error in measurements, I will take `35 microseconds` as the cutoff between 1 and 0.
 Also, I want to separate reading data and parsing it, so no CPU cycles will be spent during receiving on other than reading data from device.
 
 "Raw data" will be represented with `Event` structure, which will have timestamp and type: 

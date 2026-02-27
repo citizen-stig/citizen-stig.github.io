@@ -87,7 +87,7 @@ pub enum ConversionError {
 }
 {% endhighlight %}
 
-To check the size of a generic type we will use [`std::mem::size_of`]() like that:
+To check the size of a generic type we will use [`std::mem::size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html) like that:
 
 {% highlight rust %}
 if bits.len() > (std::mem::size_of::<T>() * 8) {

@@ -4,6 +4,9 @@ _site
 .idea
 drafts
 .jekyll-cache/
+.jekyll-metadata
 _drafts/
 
 .DS_Store
+
+vendor

@@ -1,6 +1,6 @@
 ---
-title: Why I Started Working Blockchain
-description: Why and how I switched carrer from being in web development to fascinating world of blockchain.  
+title: Why I Started Working in Blockchain
+description: Why and how I switched career from being in web development to fascinating world of blockchain.  
 layout: post
 date: 2024-10-04 11:15:00 +0100
 tags: [blockchain, technology]
@@ -11,7 +11,7 @@ comments: true
 
 Blockchain technology emerged with the publishing of the Bitcoin whitepaper in 2008, introducing a decentralized ledger system that promised transparency and security without intermediaries.
 
-Today, everyone has heard about Bitcoin. Back in 2012, when I first encountered it, I was exhilarated. The idea was mind-blowing. Just imagine: someone proposes an ever-growing ledger—a chain of blocks—secured not by a central authority but by solving complex mathematical puzzles. It challenged everything I knew about limits of where you can aim in regards of system design.
+Today, everyone has heard about Bitcoin. Back in 2012, when I first encountered it, I was exhilarated. The idea was mind-blowing. Just imagine: someone proposes an ever-growing ledger—a chain of blocks—secured not by a central authority but by solving complex mathematical puzzles. It challenged everything I knew about limits of where you can aim with regard to system design.
 
 At the time, the world was reeling from the economic crisis, and Bitcoin seemed like a direct response to the bailouts of big banks and the erosion of trust in financial institutions. It was inspiring to see the possibility of reclaiming control over the monetary system.
 
@@ -29,7 +29,7 @@ Yet, even in 2018, I wasn't completely convinced. The conversations were dominat
 When my daughter was born, I found myself spending a lot of time walking with a stroller, listening to podcasts, and thinking about various topics. I listened extensively to discussions about the technology being developed in blockchain. For the first time, I heard about zero-knowledge succinct proofs, rollups, scalability solutions, quadratic voting, etc.
 
 
-I listened [Bankless podcast](https://www.bankless.com/podcast), read [Vitalik's blog](https://vitalik.eth.limo/) and followed [Polynya](https://x.com/apolynya) on Twitter. 
+I listened to the [Bankless podcast](https://www.bankless.com/podcast), read [Vitalik's blog](https://vitalik.eth.limo/) and followed [Polynya](https://x.com/apolynya) on Twitter. 
 
 I also listened to podcasts about the history of the internet.
 
@@ -53,7 +53,7 @@ I've been a web developer since 2014 and have been in the industry since 2012. M
 
 However, I began to feel that web development was becoming more like shopping than engineering. You select a database, pick a message queue, choose a caching system, decide on a Java or Go framework, glue them together, and then continuously tweak them. There was little room for true innovation or creativity.
 
-I grew tired of Java. Debugging the thousandth NullPointerException in 2020 felt outdated and unproductive. Golang didn't seem much better to me, because despite being relatively new language some [of its design decisions](https://jesseduffield.com/Gos-Shortcomings-1/).
+I grew tired of Java. Debugging the thousandth NullPointerException in 2020 felt outdated and unproductive. Golang didn't seem much better to me, because despite being a relatively new language, some [of its design decisions](https://jesseduffield.com/Gos-Shortcomings-1/) felt like steps backward.
 People often say, "Language is just a tool; you need to use the right tool." 
 But I noticed that while "developer productivity is important," there was a reluctance to take risks and challenge the status quo.
 
@@ -63,7 +63,7 @@ At my current job in 2024, I'm able to refactor in a week or two what would have
 
 All of this led me to conclude that my next role should be in blockchain development using Rust. Initially, I had some doubts and considered Golang as an option, but I decided to stick with the vision I had. I wanted to be part of an industry that was innovative and challenging, and I believed that blockchain and Rust offered exactly that.
 
-## How I got there.
+## How I got there
 
 Transitioning into the blockchain industry took time. I didn't have experience either in blockchain or in Rust.
 
@@ -75,7 +75,7 @@ I completed a blockchain course on Udacity, which provided me with hands-on expe
 
 It's widely known how the recruiting process typically works—you need to tick the boxes and have formal professional experiences. But I hoped to find a place that valued potential and willingness to learn over strict qualifications.
 
-Fortunately for me, [Consensys]([Consensys](https://consensys.io/) didn't conform to the usual processes yet. They were creative and flexible in their approach. My interview process was not entirely standard. It included the classic pair programming session, but the final stage was unique—it involved preparing a presentation on "What are rollups."
+Fortunately for me, [Consensys](https://consensys.io/) didn't conform to the usual processes yet. They were creative and flexible in their approach. My interview process was not entirely standard. It included the classic pair programming session, but the final stage was unique—it involved preparing a presentation on "What are rollups."
 
 This kind of assessment allowed me to dive deep into a specific topic and demonstrate my genuine interest. For them, it provided insight into my enthusiasm and ability to grasp complex concepts. These are qualities that are hard to quantify with traditional interviews but offer significant value.
 
@@ -87,7 +87,7 @@ This opportunity not only allowed me to apply my existing skills but also to imm
 
 ## Controversy
 
-There's downside to any decisions, and this is not an exception. 
+There's a downside to any decisions, and this is not an exception. 
 
 This industry has **a bad reputation** due to its association with criminal activities, environmental concerns, and inefficiency.
 
@@ -107,7 +107,7 @@ I often hear that blockchain has no real use case, and I won't pretend this crit
 
  * **Critical Internet Infrastructure**: The Domain Name System (DNS) is controlled by centralized entities, making it vulnerable to censorship and attacks. Blockchain can offer decentralized alternatives that enhance security and resilience. Projects like [Filecoin](https://filecoin.io/) and the [InterPlanetary File System (IPFS)](https://ipfs.tech/) demonstrate how data storage and naming can be decentralized.
 
-* **Identity and Reputation Systems**: In the age of generative AI models, issues like fake accounts and identity fraud are escalating. Sybil resistance—the ability to prevent a single entity from creating multiple fraudulent identities—is crucial. Blockchain-based identity systems can help establish trust and authenticity online, enabling more secure interactions.
+ * **Identity and Reputation Systems**: In the age of generative AI models, issues like fake accounts and identity fraud are escalating. Sybil resistance—the ability to prevent a single entity from creating multiple fraudulent identities—is crucial. Blockchain-based identity systems can help establish trust and authenticity online, enabling more secure interactions.
 
 Of course, the counter-argument that existing services "work fine" is still prevalent. But consider this: regular mail in the early 20th century was highly efficient, arguably more so than the first computers. Yet, technological advancements propelled us forward, leading to innovations we now consider indispensable.
 
@@ -124,7 +124,7 @@ Protocols are more enduring than products. While social media platforms come and
 
 I grew up in the 90s, experiencing an internet not yet dominated by big corporations. It wasn't as ergonomic or safe, but it was unfiltered and open, and I value that freedom. I believe blockchain technology is the missing piece in transforming the internet to be truly free and open again. Commodifying essential platforms like finance and e-commerce is a necessary step forward, democratizing access and reducing centralized control.
 
-Privacy is another core value for me. The "I have nothing to hide" argument only holds until the political system in your country functions properly. I've lived in Russia until 2017 and experience this transition myself.
+Privacy is another core value for me. The "I have nothing to hide" argument only holds until the political system in your country functions properly. I've lived in Russia until 2017 and experienced this transition myself.
 History shows that bad periods come from time to time, and it's prudent to have protections for your basic rights. 
 Personal privacy should not be a luxury but a fundamental aspect of our digital lives.
 
@@ -136,9 +136,9 @@ By being here I feel that I gain more despite all downsides of blockchain and so
 
 ## What future holds
 
-It is not given that free societies we have now will hold test of time.
+It is not given that free societies we have now will stand the test of time.
 
-We might end up in deliberatly built panopticon.  More on this in my favourite philosphy podcst, [episode 121](https://www.philosophizethis.org/transcript/episode-121-transcript)
+We might end up in deliberately built panopticon. More on this in my favourite philosophy podcast, [episode 121](https://www.philosophizethis.org/transcript/episode-121-transcript).
 
 
 **Privacy vs. "Fighting Terrorism"**
